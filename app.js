@@ -36,7 +36,7 @@ app.post("/signup", validateSignup, AuthController.signup);
 app.post("/login", validateLogin, AuthController.login);
 
 // add router
-app.use("/api", router);
+app.use("/api", protect, router);
 
 mongoose.set("strictQuery", true);
 mongoose
