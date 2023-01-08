@@ -3,7 +3,7 @@ const router = express.Router();
 
 const StudentController = require("../controllers/StudentsController");
 const LecturerController = require("../controllers/LecturerController");
-const { validateStudent } = require("../helpers/StudentHelper");
+const { validateStudent } = require("../helpers/StudentHelpers");
 const { validateLecturer } = require("../helpers/LecturerHelpers");
 
 /**
