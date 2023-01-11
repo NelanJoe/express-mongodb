@@ -11,11 +11,10 @@ const {
   validateLogin,
 } = require("./helpers/AuthHelpers");
 const AuthController = require("./controllers/AuthController");
+const { connectToMongoDB } = require("./config/db");
 
 const app = express();
 const PORT = process.env.PORT || 8000;
-
-const { MONGO_URI } = process.env;
 
 //Adding middleware
 app.use(cors());
@@ -38,16 +37,10 @@ app.post("/login", validateLogin, AuthController.login);
 // add router
 app.use("/api", protect, router);
 
-mongoose.set("strictQuery", true);
-mongoose
-  .connect(MONGO_URI)
-  .then(() => {
-    console.log("Database Connected");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// Connect MongoDB Atlas
+connectToMongoDB();
 
+// application listening
 app.listen(PORT, () => {
   console.log(`Server listen on http://localhost:${PORT}`);
 });
