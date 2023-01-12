@@ -10,6 +10,7 @@ const {
   successSignIn,
   successSignUp,
   errorAuth,
+  validation,
 } = require("../helpers/ApiFormatter");
 
 const { validationResult } = require("express-validator");
@@ -21,7 +22,8 @@ class AuthController {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).json(errors);
+      res.status(400).json(validation(errors.array()));
+      return;
     }
 
     const hash = await hashPasswords(password);
@@ -43,7 +45,8 @@ class AuthController {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).json(errors);
+      res.status(400).json(validation(errors.array()));
+      return;
     }
 
     const user = await User.findOne({ email: email });

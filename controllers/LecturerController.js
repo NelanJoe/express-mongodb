@@ -2,8 +2,8 @@ const { validationResult } = require("express-validator");
 const {
   success,
   error,
-  errorDelete,
   successDelete,
+  validation,
 } = require("../helpers/ApiFormatter");
 
 const { Lecturer } = require("../models/Lecturers");
@@ -38,7 +38,7 @@ class LecturersController {
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).json(error(400, errors.array()));
+      res.status(400).json(validation(errors.array()));
       return;
     }
 
@@ -60,7 +60,7 @@ class LecturersController {
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).json(error(400, errors.array()));
+      res.status(400).json(validation(errors.array()));
       return;
     }
 

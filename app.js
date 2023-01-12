@@ -2,11 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const router = require("./routes/api");
+
 const {
-  protect,
-  validateSignup,
   validateLogin,
-} = require("./helpers/AuthHelpers");
+  validateSignup,
+  protect,
+} = require("./middlewares/AuthMiddleware");
+
 const AuthController = require("./controllers/AuthController");
 const { connectToMongoDB } = require("./config/db");
 

@@ -20,13 +20,6 @@ exports.successDelete = (code, message) => {
   };
 };
 
-exports.errorDelete = (code, message) => {
-  return {
-    code: code,
-    message: message,
-  };
-};
-
 exports.successSignUp = (code, message) => {
   return {
     code: code,
@@ -46,5 +39,17 @@ exports.errorAuth = (code, message) => {
   return {
     code: code,
     message: message,
+  };
+};
+
+
+/**
+ * * Make function for validation
+ * */
+exports.validation = (error) => {
+  return {
+    code: 422,
+    message: "Validation Error",
+    error,
   };
 };
