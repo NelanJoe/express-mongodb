@@ -1,10 +1,21 @@
+const { User } = require("../models/User");
 const { check } = require("express-validator");
 const { errorAuth } = require("../helpers/ApiFormatter");
 const jwt = require("jsonwebtoken");
 
 exports.validateSignup = [
   check("username", "Nama tidak boleh kosong").notEmpty(),
-  check("email", "Email tidak boleh kosong").notEmpty(),
+  check("email", "Email tidak boleh kosong")
+    .notEmpty()
+    .custom((value) => {
+      return User.findOne({
+        value,
+      }).then((user) => {
+        if (user) {
+          return Promise.reject("E-mail sudah digunakan");
+        }
+      });
+    }),
   check("password", "Password tidak boleh kosong").notEmpty().isLength({
     min: 6,
   }),
