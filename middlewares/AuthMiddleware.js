@@ -9,7 +9,7 @@ exports.validateSignup = [
     .notEmpty()
     .custom((value) => {
       return User.findOne({
-        value,
+        email: value,
       }).then((user) => {
         if (user) {
           return Promise.reject("E-mail sudah digunakan");
